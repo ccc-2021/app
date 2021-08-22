@@ -22,3 +22,10 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//React 表示テスト
+Route::get('/{any}', function(){
+    return view('app');
+})->where('any', '.*');
