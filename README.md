@@ -11,6 +11,14 @@ php artisan key:generate
 npm i && npm run prod
 
 ./vendor/bin/sail up -d
+
+./vendor/bin/sail artisan key:generate
+
+./vendor/bin/sail npm i
+./vendor/bin/sail npm run prod
+
+./vendor/bin/sail artisan migrate
+
 ```
 
 * If you have only Docker installed.
@@ -25,13 +33,14 @@ docker run --rm \
 
 cp .env.example .env
 
+./vendor/bin/sail up -d
+
 ./vendor/bin/sail artisan key:generate
 
 ./vendor/bin/sail npm i
-
 ./vendor/bin/sail npm run prod
 
-./vendor/bin/sail up -d
+./vendor/bin/sail artisan migrate
 ```
 
 ## Example Environment Variables
