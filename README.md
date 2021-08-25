@@ -34,6 +34,17 @@ cp .env.example .env
 ./vendor/bin/sail up -d
 ```
 
+## Example Environment Variables
+```
+DB_CONNECTION=mysql
+DB_HOST=mysql
+DB_PORT=3306
+DB_DATABASE=yy_deliver
+DB_USERNAME=sail
+DB_PASSWORD=password
+```
+
+
 ## Accesses
 
 Now, you can access the application in your web browser at: [http://localhost](http://localhost).
