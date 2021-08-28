@@ -15,20 +15,15 @@ class CreateSchedulesTable extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
-            $table->Biginteger('created_user_id')->unsigned();
-            $table->Biginteger('fork_user_id')->nullable();//これあってる？
-            $table->biginteger('genre_id')->unsigned();
+            $table->foreignId('user_id')->constrained();//foreign使おうとしたところcreate_が邪魔だったため外しました
+            $table->Biginteger('fork_user_id')->nullable();//
+            $table->foreignId('genre_id')->constrained();
             $table->string('content');
-            $table->timestamp('start_at');
-            $table->timestamp('end_at')->nullable();
+            $table->datetime('start_at');
+            $table->datetime('end_at')->nullable();
             $table->timestamps();
-
             //外部キー設定 create_user_id
-            $table->foreign('created_user_id')->references('id')->on('users');
-            //外部キー設定 fork_user_id
-            // $table->foreign('fork_user_id')->references('id')->on('users');
-            //外部キー設定 genre_id
-            $table->foreign('genre_id')->references('id')->on('genres');
+            // $table->foreign('created_user_id')->references('id')->on('users');
         });
     }
 
