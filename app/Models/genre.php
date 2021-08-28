@@ -4,19 +4,33 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class genre extends Model
+/**
+ * App\Models\Genre
+ *
+ * @property int $id
+ * @property string $name ジャンル名
+ * @property string $detail ジャンル説明
+ */
+class Genre extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasFactory;
 
-        protected $fillable = [
-            'name',
-            'detail',
-        ];
+    protected $fillable = [
+        'name',
+        'detail',
+    ];
 
-        protected $casts = [
-        
-        ];
+    public $timestamps = false;
+
+    /**
+     * Return the schedule for this genre.
+     *
+     * @return BelongsToMany
+     */
+    public function schedules(): BelongsToMany
+    {
+        return $this->belongsToMany(Schedule::class);
+    }
 }
