@@ -22,9 +22,12 @@ class CreateSchedulesTable extends Migration
                 ->constrained('users');
 
             $table->foreignId('schedule_id')
+                ->nullable()
                 ->comment('フォーク元スケジュール')
                 ->constrained();
 
+            $table->string('title')
+                ->comment('スケジュールタイトル');
             $table->text('content')
                 ->comment('スケジュール内容');
 
@@ -33,6 +36,7 @@ class CreateSchedulesTable extends Migration
             $table->datetime('end_at')
                 ->comment('スケジュール終了日時');
 
+            $table->timestamps();
             $table->softDeletes();
         });
     }

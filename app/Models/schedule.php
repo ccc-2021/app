@@ -21,6 +21,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
+ * @property string $title スケジュールタイトル
  */
 class Schedule extends Model
 {
@@ -33,6 +34,7 @@ class Schedule extends Model
         'content',
         'start_at',
         'end_at',
+        'title',
     ];
 
     public function user(): BelongsTo
