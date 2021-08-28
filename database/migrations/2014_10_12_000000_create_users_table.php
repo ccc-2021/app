@@ -19,8 +19,12 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->integer('type');//性別:1 男性 2 女性 3 その他
+            $table->string('profile_photo_path')->nullable();//プロフィール画像なしの場合も含めて
             $table->rememberToken();
+            $table->timestamp('banned_at')->nullable();
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 
