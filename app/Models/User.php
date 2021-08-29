@@ -72,6 +72,26 @@ class User extends Authenticatable
     ];
 
     /**
+     * Return the user type.
+     *
+     * @return int
+     */
+    public function type(): int
+    {
+        return (int) $this->type;
+    }
+
+    /**
+     * Return the user is administrator or not
+     *
+     * @return bool
+     */
+    public function isAdmin(): bool
+    {
+        return $this->type() === self::ADMIN;
+    }
+
+    /**
      * Get the URL to the user's profile photo.
      *
      * @return string
