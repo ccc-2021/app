@@ -37,6 +37,16 @@ class Schedule extends Model
         'title',
     ];
 
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'start_at'  => 'datetime',
+        'end_at'    => 'datetime',
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
