@@ -19,8 +19,10 @@ class CreateGenreScheduleTable extends Migration
                 ->constrained();
 
             $table->foreignId('schedule_id')
-                ->comment('ジャンル')
-                ->constrained();
+                ->comment('スケジュール')
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

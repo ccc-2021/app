@@ -19,12 +19,15 @@ class CreateSchedulesTable extends Migration
             $table->foreignId('user_id')
                 ->index()
                 ->comment('作成者')
-                ->constrained('users');
+                ->constrained('users')
+                ->onDelete('cascade');
 
             $table->foreignId('schedule_id')
                 ->nullable()
                 ->comment('フォーク元スケジュール')
-                ->constrained();
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('set null');
 
             $table->string('title')
                 ->comment('スケジュールタイトル');
