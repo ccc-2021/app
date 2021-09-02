@@ -71,6 +71,10 @@ class User extends Authenticatable
         'banned_at'         => 'datetime',
     ];
 
+    protected $appends = [
+        'profile_photo_url',
+    ];
+
     /**
      * Return the user type.
      *
