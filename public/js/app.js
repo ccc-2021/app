@@ -3926,6 +3926,188 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./resources/js/Pages/Dashboard.tsx":
+/*!******************************************!*\
+  !*** ./resources/js/Pages/Dashboard.tsx ***!
+  \******************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js")); // @ts-ignore
+
+
+var Authenticated_1 = __importDefault(__webpack_require__(/*! @/Layouts/Authenticated */ "./resources/js/Layouts/Authenticated.js"));
+
+var ArticleCard_1 = __webpack_require__(/*! @/components/ArticleCard */ "./resources/js/components/ArticleCard.tsx");
+
+function Dashboard(props) {
+  return react_1["default"].createElement(Authenticated_1["default"], {
+    auth: props.auth,
+    errors: props.errors,
+    header: react_1["default"].createElement("h2", {
+      className: "font-semibold text-xl text-gray-800 leading-tight"
+    }, "Dashboard")
+  }, react_1["default"].createElement("div", {
+    className: "py-12"
+  }, react_1["default"].createElement("div", {
+    className: "max-w-7xl mx-auto sm:px-6 lg:px-8"
+  }, props.schedules.map(function (schedule, i) {
+    return react_1["default"].createElement(ArticleCard_1.ArticleCard, {
+      key: i,
+      item: schedule
+    });
+  }))));
+}
+
+exports.default = Dashboard;
+
+/***/ }),
+
+/***/ "./resources/js/components/ArticleCard.tsx":
+/*!*************************************************!*\
+  !*** ./resources/js/components/ArticleCard.tsx ***!
+  \*************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.ArticleCard = void 0;
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var UserAvatar_1 = __webpack_require__(/*! ./UserAvatar */ "./resources/js/components/UserAvatar.tsx");
+
+var StatIcon_1 = __webpack_require__(/*! ./StatIcon */ "./resources/js/components/StatIcon.tsx");
+
+var ArticleCard = function ArticleCard(props) {
+  var _a = props.item,
+      title = _a.title,
+      content = _a.content,
+      user = _a.user;
+  return react_1["default"].createElement("article", {
+    className: "mt-6"
+  }, react_1["default"].createElement("div", {
+    className: "mx-auto max-w-4xl px-10 py-6 bg-white rounded-lg shadow-md"
+  }, react_1["default"].createElement("div", {
+    className: "mt-2"
+  }, react_1["default"].createElement("h2", {
+    className: "text-2xl text-gray-700 font-bold"
+  }, title), react_1["default"].createElement("div", {
+    className: "flex items-center"
+  }, react_1["default"].createElement(UserAvatar_1.UserAvatar, {
+    user: user
+  }), react_1["default"].createElement("span", {
+    className: "mx-1 text-gray-600"
+  }, user.name)), react_1["default"].createElement("div", null, react_1["default"].createElement("div", {
+    className: "flex items-center"
+  }, react_1["default"].createElement("div", {
+    className: "flex items-center"
+  }, react_1["default"].createElement(StatIcon_1.StatIcon, null), react_1["default"].createElement(StatIcon_1.StatIcon, null), react_1["default"].createElement(StatIcon_1.StatIcon, null), react_1["default"].createElement(StatIcon_1.StatIcon, null), react_1["default"].createElement(StatIcon_1.StatIcon, null)), react_1["default"].createElement("p", {
+    className: "sr-only"
+  }, "4 out of 5 stars"), react_1["default"].createElement("span", {
+    className: "ml-3 text-sm font-medium text-gray-500"
+  }, "133 \u4EF6\u306E\u30EC\u30D3\u30E5\u30FC"))), react_1["default"].createElement("p", {
+    className: "mt-2 text-gray-800 text-md"
+  }, content))));
+};
+
+exports.ArticleCard = ArticleCard;
+
+/***/ }),
+
+/***/ "./resources/js/components/StatIcon.tsx":
+/*!**********************************************!*\
+  !*** ./resources/js/components/StatIcon.tsx ***!
+  \**********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.StatIcon = void 0;
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var StatIcon = function StatIcon() {
+  return react_1["default"].createElement("svg", {
+    className: "text-blue-500 h-5 w-5 flex-shrink-0",
+    viewBox: "0 0 20 20",
+    fill: "currentColor",
+    "aria-hidden": "true"
+  }, react_1["default"].createElement("path", {
+    d: "M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+  }));
+};
+
+exports.StatIcon = StatIcon;
+
+/***/ }),
+
+/***/ "./resources/js/components/UserAvatar.tsx":
+/*!************************************************!*\
+  !*** ./resources/js/components/UserAvatar.tsx ***!
+  \************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.UserAvatar = void 0;
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var UserAvatar = function UserAvatar(props) {
+  return react_1["default"].createElement("img", {
+    src: props.user.profile_photo_url,
+    alt: props.user.name,
+    className: "inline-block h-10 w-10 rounded-full"
+  });
+};
+
+exports.UserAvatar = UserAvatar;
+
+/***/ }),
+
 /***/ "./resources/js/Components/ApplicationLogo.js":
 /*!****************************************************!*\
   !*** ./resources/js/Components/ApplicationLogo.js ***!
@@ -5197,54 +5379,6 @@ function VerifyEmail(_ref) {
           className: "underline text-sm text-gray-600 hover:text-gray-900",
           children: "Log Out"
         })]
-      })
-    })]
-  });
-}
-
-/***/ }),
-
-/***/ "./resources/js/Pages/Dashboard.js":
-/*!*****************************************!*\
-  !*** ./resources/js/Pages/Dashboard.js ***!
-  \*****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ Dashboard)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _Layouts_Authenticated__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Layouts/Authenticated */ "./resources/js/Layouts/Authenticated.js");
-/* harmony import */ var _inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @inertiajs/inertia-react */ "./node_modules/@inertiajs/inertia-react/dist/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-
-
-
-
-function Dashboard(props) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_Layouts_Authenticated__WEBPACK_IMPORTED_MODULE_1__.default, {
-    auth: props.auth,
-    errors: props.errors,
-    header: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
-      className: "font-semibold text-xl text-gray-800 leading-tight",
-      children: "Dashboard"
-    }),
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_2__.Head, {
-      title: "Dashboard"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-      className: "py-12",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-        className: "max-w-7xl mx-auto sm:px-6 lg:px-8",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-          className: "bg-white overflow-hidden shadow-sm sm:rounded-lg",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-            className: "p-6 bg-white border-b border-gray-200",
-            children: "You're logged in!"
-          })
-        })
       })
     })]
   });
@@ -57810,8 +57944,8 @@ var map = {
 	"./Auth/ResetPassword.js": "./resources/js/Pages/Auth/ResetPassword.js",
 	"./Auth/VerifyEmail": "./resources/js/Pages/Auth/VerifyEmail.js",
 	"./Auth/VerifyEmail.js": "./resources/js/Pages/Auth/VerifyEmail.js",
-	"./Dashboard": "./resources/js/Pages/Dashboard.js",
-	"./Dashboard.js": "./resources/js/Pages/Dashboard.js",
+	"./Dashboard": "./resources/js/Pages/Dashboard.tsx",
+	"./Dashboard.tsx": "./resources/js/Pages/Dashboard.tsx",
 	"./Welcome": "./resources/js/Pages/Welcome.js",
 	"./Welcome.js": "./resources/js/Pages/Welcome.js"
 };

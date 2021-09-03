@@ -11,14 +11,18 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
+mix.ts('resources/js/app.js', 'public/js')
     .react()
     .postCss('resources/css/app.css', 'public/css', [
         require('postcss-import'),
         require('tailwindcss'),
         require('autoprefixer'),
     ])
-    .webpackConfig(require('./webpack.config'));
+    .webpackConfig(require('./webpack.config'))
+    .browserSync({
+        proxy: 'localhost', // your domain test
+        port: 3000 // your port
+    });
 
 if (mix.inProduction()) {
     mix.version();
