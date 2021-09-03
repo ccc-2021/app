@@ -34,6 +34,8 @@ class CreateReviewsTable extends Migration
             $table->string('comment')
                 ->comment('コメント');
 
+            $table->timestamps();
+            $table->softDeletes();
             
         });
     }

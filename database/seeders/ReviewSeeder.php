@@ -7,8 +7,6 @@ use App\Models\Review;
 use App\Models\Schedule;
 use Exception;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-
 
 class ReviewSeeder extends Seeder
 {
@@ -22,7 +20,7 @@ class ReviewSeeder extends Seeder
         $comments = ['使えなかった','あまり使えなかった','普通','結構使えた','かなり使えた'];
         $i = 1;
         foreach ($comments as $comment) {
-            DB::table('reviews')->insert([
+            Review::create([
                     'user_id' => $i,
                     'schedule_id' => $i,
                     'rate' => $i,
@@ -30,5 +28,6 @@ class ReviewSeeder extends Seeder
                 ]);
             $i = $i +1;
         }
+        
     }
 }
