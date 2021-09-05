@@ -1,4 +1,4 @@
-import ApplicationLogo from '@/Components/ApplicationLogo';
+import ApplicationLogo from '@/Components/Atomic/Atoms/ApplicationLogo';
 import React from 'react';
 import { InertiaLink } from '@inertiajs/inertia-react';
 

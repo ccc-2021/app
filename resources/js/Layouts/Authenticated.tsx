@@ -1,8 +1,8 @@
-import ApplicationLogo from "@/Components/ApplicationLogo";
-import Dropdown from '@/Components/Dropdown';
-import NavLink from '@/Components/NavLink';
+import ApplicationLogo from "@/Components/Atomic/Atoms/ApplicationLogo";
+import Dropdown from '@/Components/Atomic/Atoms/Dropdown';
+import NavLink from '@/Components/Atomic/Atoms/NavLink';
 import React, { useState } from 'react';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
+import ResponsiveNavLink from '@/Components/Atomic/Atoms/ResponsiveNavLink';
 import { InertiaLink } from '@inertiajs/inertia-react';
 import route from 'ziggy-js';
 
