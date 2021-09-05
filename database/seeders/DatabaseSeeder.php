@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
 
         if (!App::environment('production')) {
             $this->call(UserSeeder::class);
+            $this->call(ReviewSeeder::class);
         }
 
         $this->call(GenreSeeder::class);

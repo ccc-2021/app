@@ -2,11 +2,12 @@
 
 namespace Database\Seeders;
 
-use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Review;
 use App\Models\Schedule;
-use Exception;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
+
 
 class ReviewSeeder extends Seeder
 {
@@ -17,17 +18,19 @@ class ReviewSeeder extends Seeder
      */
     public function run()
     {
-        $comments = ['使えなかった','あまり使えなかった','普通','結構使えた','かなり使えた'];
-        $i = 1;
-        foreach ($comments as $comment) {
-            Review::create([
-                    'user_id' => $i,
-                    'schedule_id' => $i,
-                    'rate' => $i,
-                    'comment' => $comment
-                ]);
-            $i = $i +1;
-        }
-        
+        $users = User::all();
+        $schedules = Schedule::all();
+
+        $schedules->each(function ($schedule) use ($users) {
+            Review::factory()
+                ->count(5)
+                ->state(new Sequence(
+                    fn() => [
+                        'user_id' => $users->random()->id,
+                        'schedule_id' => $schedule->id,
+                    ],
+                ))
+                ->create();
+        });
     }
 }
