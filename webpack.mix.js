@@ -20,7 +20,7 @@ mix.ts('resources/js/app.js', 'public/js')
     ])
     .browserSync({
         proxy: {
-            target: "http://localhost"
+            target: "http://127.0.0.1:8000/"
         },
         port: 3000 // your port
     })

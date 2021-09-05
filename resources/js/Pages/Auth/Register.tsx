@@ -1,15 +1,17 @@
-import React, { useEffect } from 'react';
 import Button from '@/Components/Button';
 import Guest from '@/Layouts/Guest';
 import Input from '@/Components/Input';
 import Label from '@/Components/Label';
+import React, { useEffect } from 'react';
 import ValidationErrors from '@/Components/ValidationErrors';
-import { Head, useForm } from '@inertiajs/inertia-react';
+import { InertiaLink } from '@inertiajs/inertia-react';
+import { useForm } from '@inertiajs/inertia-react';
+import route from 'ziggy-js';
 
-export default function ResetPassword({ token, email }) {
+export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
-        token: token,
-        email: email,
+        name: '',
+        email: '',
         password: '',
         password_confirmation: '',
     });
@@ -20,24 +22,37 @@ export default function ResetPassword({ token, email }) {
         };
     }, []);
 
-    const onHandleChange = (event) => {
-        setData(event.target.name, event.target.value);
+    const onHandleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setData(event.target.name as "name" | "email" | "password" | "password_confirmation", event.target.type === 'checkbox' ? event.target.checked + '' : event.target.value);
     };
 
-    const submit = (e) => {
+    const submit = (e: React.SyntheticEvent) => {
         e.preventDefault();
 
-        post(route('password.update'));
+        post(route('register'));
     };
 
     return (
         <Guest>
-            <Head title="Reset Password" />
-
             <ValidationErrors errors={errors} />
 
             <form onSubmit={submit}>
                 <div>
+                    <Label forInput="name" value="Name" />
+
+                    <Input
+                        type="text"
+                        name="name"
+                        value={data.name}
+                        className="mt-1 block w-full"
+                        autoComplete="name"
+                        isFocused={true}
+                        handleChange={onHandleChange}
+                        required
+                    />
+                </div>
+
+                <div className="mt-4">
                     <Label forInput="email" value="Email" />
 
                     <Input
@@ -47,6 +62,7 @@ export default function ResetPassword({ token, email }) {
                         className="mt-1 block w-full"
                         autoComplete="username"
                         handleChange={onHandleChange}
+                        required
                     />
                 </div>
 
@@ -59,8 +75,8 @@ export default function ResetPassword({ token, email }) {
                         value={data.password}
                         className="mt-1 block w-full"
                         autoComplete="new-password"
-                        isFocused={true}
                         handleChange={onHandleChange}
+                        required
                     />
                 </div>
 
@@ -72,14 +88,18 @@ export default function ResetPassword({ token, email }) {
                         name="password_confirmation"
                         value={data.password_confirmation}
                         className="mt-1 block w-full"
-                        autoComplete="new-password"
                         handleChange={onHandleChange}
+                        required
                     />
                 </div>
 
                 <div className="flex items-center justify-end mt-4">
+                    <InertiaLink href={route('login')} className="underline text-sm text-gray-600 hover:text-gray-900">
+                        Already registered?
+                    </InertiaLink>
+
                     <Button className="ml-4" processing={processing}>
-                        Reset Password
+                        Register
                     </Button>
                 </div>
             </form>

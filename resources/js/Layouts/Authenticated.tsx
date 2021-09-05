@@ -1,11 +1,19 @@
-import React, { useState } from 'react';
-import ApplicationLogo from '@/Components/ApplicationLogo';
+import ApplicationLogo from "@/Components/ApplicationLogo";
 import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
+import React, { useState } from 'react';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
-import { Link } from '@inertiajs/inertia-react';
+import { InertiaLink } from '@inertiajs/inertia-react';
+import route from 'ziggy-js';
 
-export default function Authenticated({ auth, header, children }) {
+interface Props {
+    auth: any;
+    header: React.ReactNode;
+    children: React.ReactNode;
+    errors?: any;
+}
+
+export default function Authenticated({ auth, header, children }: Props) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
     return (
@@ -15,9 +23,9 @@ export default function Authenticated({ auth, header, children }) {
                     <div className="flex justify-between h-16">
                         <div className="flex">
                             <div className="flex-shrink-0 flex items-center">
-                                <Link href="/">
+                                <InertiaLink href="/">
                                     <ApplicationLogo className="block h-9 w-auto text-gray-500" />
-                                </Link>
+                                </InertiaLink>
                             </div>
 
                             <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
@@ -91,7 +99,11 @@ export default function Authenticated({ auth, header, children }) {
 
                 <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
                     <div className="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
+                        <ResponsiveNavLink
+                            method="post"
+                            href={route('dashboard')}
+                            active={route().current('dashboard')}
+                        >
                             Dashboard
                         </ResponsiveNavLink>
                     </div>

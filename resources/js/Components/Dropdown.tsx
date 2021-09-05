@@ -1,10 +1,17 @@
-import React, { useState, useContext } from 'react';
-import { Link } from '@inertiajs/inertia-react';
+import React, { useState, useContext, ReactNode, PropsWithChildren, MouseEventHandler } from 'react';
+import { InertiaLink } from '@inertiajs/inertia-react';
 import { Transition } from '@headlessui/react';
 
-const DropDownContext = React.createContext();
 
-const Dropdown = ({ children }) => {
+interface Context {
+    open: boolean,
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>,
+    toggleOpen: MouseEventHandler<HTMLDivElement>,
+}
+
+const DropDownContext = React.createContext<Context>({} as Context);
+
+const Dropdown:React.FC = ({children}) => {
     const [open, setOpen] = useState(false);
 
     const toggleOpen = () => {
@@ -18,7 +25,7 @@ const Dropdown = ({ children }) => {
     );
 };
 
-const Trigger = ({ children }) => {
+const Trigger: React.FC = ({children}) => {
     const { open, setOpen, toggleOpen } = useContext(DropDownContext);
 
     return (
@@ -30,7 +37,13 @@ const Trigger = ({ children }) => {
     );
 };
 
-const Content = ({ align = 'right', width = '48', contentClasses = 'py-1 bg-white', children }) => {
+type ContentProps = {
+    align?: string;
+    width?: string;
+    contentClasses?: string;
+}
+
+const Content: React.FC<ContentProps> = ({ align = 'right', width = '48', contentClasses = 'py-1 bg-white', children }) => {
     const { open, setOpen } = useContext(DropDownContext);
 
     let alignmentClasses = 'origin-top';
@@ -73,21 +86,27 @@ const Content = ({ align = 'right', width = '48', contentClasses = 'py-1 bg-whit
     );
 };
 
-const DropdownLink = ({ href, method = 'post', as = 'a', children }) => {
+type LinkProps = {
+    href?: string;
+    method?: string;
+    as?: string;
+}
+
+const Link: React.FC<LinkProps> = ({ href = '', method = 'post', as = 'a', children }) => {
     return (
-        <Link
+        <InertiaLink
             href={href}
             method={method}
             as={as}
             className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
         >
             {children}
-        </Link>
+        </InertiaLink>
     );
 };
 
-Dropdown.Trigger = Trigger;
-Dropdown.Content = Content;
-Dropdown.Link = DropdownLink;
-
-export default Dropdown;
+export default Object.assign(Dropdown, {
+    Trigger,
+    Content,
+    Link
+})

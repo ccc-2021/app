@@ -1,5 +1,5 @@
 import React from "react";
-import {StarIcon} from "@/components/Atomic/Atoms/StarIcon";
+import {StarIcon} from "@/Components/Atomic/Atoms/StarIcon";
 
 export const RateStars: React.FC<{ rate: number }> = ({ rate, }) => (
     <>
