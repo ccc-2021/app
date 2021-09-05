@@ -11,7 +11,7 @@ export const UserAvatar: React.FC<{ user: Props }> = (props) => {
         <img
             src={props.user.profile_photo_url}
             alt={props.user.name}
-            className="inline-block h-10 w-10 rounded-full"
+            className="inline-block h-9 w-9 rounded-full select-none"
         />
     )
 }

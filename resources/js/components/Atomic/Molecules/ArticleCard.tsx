@@ -1,18 +1,11 @@
 import React from 'react';
-import {UserAvatar} from "./UserAvatar";
-import {StatIcon} from "./StatIcon";
+import {UserAvatar} from "@/components/Atomic/Atoms/UserAvatar";
+import {RateStars} from "@/components/Atomic/Atoms/RateStars";
+import {Schedule} from "@/types";
 
-type Props = {
-    title: string;
-    content: string;
-    user: {
-        name: string;
-        profile_photo_url: string;
-    };
-};
+export const ArticleCard: React.FC<{ schedule: Schedule }> = (props) => {
+    const {title, content, rate_avg, user, reviews,} = props.schedule;
 
-export const ArticleCard: React.FC<{ item: Props }> = (props) => {
-    const {title, content, user} = props.item;
     return (
         <article className="mt-6">
             <div className="mx-auto max-w-4xl px-10 py-6 bg-white rounded-lg shadow-md">
@@ -21,7 +14,7 @@ export const ArticleCard: React.FC<{ item: Props }> = (props) => {
                         {title}
                     </h2>
                     <div className="flex items-center">
-                        <UserAvatar user={user} />
+                        <UserAvatar user={user}/>
                         <span className="mx-1 text-gray-600">
                             {user.name}
                         </span>
@@ -29,17 +22,13 @@ export const ArticleCard: React.FC<{ item: Props }> = (props) => {
                     <div>
                         <div className="flex items-center">
                             <div className="flex items-center">
-                                <StatIcon/>
-                                <StatIcon/>
-                                <StatIcon/>
-                                <StatIcon/>
-                                <StatIcon/>
+                                <RateStars rate={rate_avg}/>
                             </div>
                             <p className="sr-only">
-                                4 out of 5 stars
+                                {rate_avg} out of 5 stars
                             </p>
                             <span className="ml-3 text-sm font-medium text-gray-500">
-                                133 件のレビュー
+                                {reviews.length} 件のレビュー
                             </span>
                         </div>
                     </div>
