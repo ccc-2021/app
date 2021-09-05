@@ -1,6 +1,6 @@
 import React from 'react';
-import {UserAvatar} from "@/components/Atomic/Atoms/UserAvatar";
-import {RateStars} from "@/components/Atomic/Atoms/RateStars";
+import {UserAvatar} from "@/Components/Atomic/Atoms/UserAvatar";
+import {RateStars} from "@/Components/Atomic/Atoms/RateStars";
 import {Schedule} from "@/types";
 
 export const ArticleCard: React.FC<{ schedule: Schedule }> = (props) => {

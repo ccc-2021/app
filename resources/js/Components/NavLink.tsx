@@ -1,9 +1,15 @@
+import { InertiaLink } from '@inertiajs/inertia-react';
 import React from 'react';
-import { Link } from '@inertiajs/inertia-react';
 
-export default function NavLink({ href, active, children }) {
+interface Props {
+    href: string;
+    active: boolean;
+    children: React.ReactNode;
+}
+
+export default function NavLink({ href, active, children }: Props) {
     return (
-        <Link
+        <InertiaLink
             href={href}
             className={
                 active
@@ -12,6 +18,6 @@ export default function NavLink({ href, active, children }) {
             }
         >
             {children}
-        </Link>
+        </InertiaLink>
     );
 }

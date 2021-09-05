@@ -1,6 +1,13 @@
 import React from 'react';
 
-export default function Button({ type = 'submit', className = '', processing, children }) {
+interface Props {
+    children: React.ReactNode;
+    type?: "submit" | "button" | "reset" | undefined;
+    processing: boolean;
+    className?: string;
+}
+
+const Button: React.FC<Props> = ({ type = 'submit', className = '', processing, children }) => {
     return (
         <button
             type={type}
@@ -15,3 +22,5 @@ export default function Button({ type = 'submit', className = '', processing, ch
         </button>
     );
 }
+
+export default Button;

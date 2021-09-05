@@ -1,7 +1,6 @@
 import React from 'react';
-// @ts-ignore
 import Authenticated from '@/Layouts/Authenticated';
-import {ScheduleTimeLine} from "@/components/Atomic/Organisms/ScheduleTimeLine";
+import {ScheduleTimeLine} from "@/Components/Atomic/Organisms/ScheduleTimeLine";
 
 export default function Dashboard(props: React.PropsWithChildren<any>) {
     const schedules = props.schedules;
