@@ -1,10 +1,10 @@
-import Button from '@/Components/Button';
-import Checkbox from '@/Components/Checkbox';
+import Button from '@/Components/Atomic/Atoms/Button';
+import Checkbox from '@/Components/Atomic/Atoms/Checkbox';
 import Guest from '@/Layouts/Guest';
-import Input from '@/Components/Input';
-import Label from '@/Components/Label';
+import Input from '@/Components/Atomic/Atoms/Input';
+import Label from '@/Components/Atomic/Atoms/Label';
 import React, { useEffect } from 'react';
-import ValidationErrors from '@/Components/ValidationErrors';
+import ValidationErrors from '@/Components/Atomic/Atoms/ValidationErrors';
 import { InertiaLink } from '@inertiajs/inertia-react';
 import { useForm } from '@inertiajs/inertia-react';
 import route from 'ziggy-js';
