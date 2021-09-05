@@ -1,9 +1,11 @@
 import React from 'react';
 // @ts-ignore
 import Authenticated from '@/Layouts/Authenticated';
-import {ArticleCard} from "@/components/ArticleCard";
+import {ScheduleTimeLine} from "@/components/Atomic/Organisms/ScheduleTimeLine";
 
 export default function Dashboard(props: React.PropsWithChildren<any>) {
+    const schedules = props.schedules;
+
     return (
         <Authenticated
             auth={props.auth}
@@ -12,11 +14,7 @@ export default function Dashboard(props: React.PropsWithChildren<any>) {
         >
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    {props.schedules.map((schedule:any, i:any) => {
-                        return (
-                            <ArticleCard key={i} item={schedule} />
-                        )
-                    })}
+                    <ScheduleTimeLine schedules={schedules} />
                 </div>
             </div>
         </Authenticated>

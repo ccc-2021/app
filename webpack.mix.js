@@ -18,11 +18,13 @@ mix.ts('resources/js/app.js', 'public/js')
         require('tailwindcss'),
         require('autoprefixer'),
     ])
-    .webpackConfig(require('./webpack.config'))
     .browserSync({
-        proxy: 'localhost', // your domain test
+        proxy: {
+            target: "http://localhost"
+        },
         port: 3000 // your port
-    });
+    })
+    .webpackConfig(require('./webpack.config'));
 
 if (mix.inProduction()) {
     mix.version();
