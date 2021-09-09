@@ -1,6 +1,5 @@
 import React from "react";
 
-
 type Props = {
     name: string;
     profile_photo_url: string;
