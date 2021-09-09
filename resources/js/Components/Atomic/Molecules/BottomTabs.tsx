@@ -32,7 +32,7 @@ export const IconLink: React.FC<Props> = ({name, link, children}) => {
 };
 
 export const BottomTabs: React.FC = () => (
-    <footer className="bottom-0 shadow-2xl border-t w-screen fixed z-50 bg-white">
+    <footer className="sm:hidden bottom-0 shadow-2xl border-t w-screen fixed z-50 bg-white">
         <div className="items-cent flex items-center justify-center justify-items-center max-w-5xl mx-auto my-3">
             <IconLink name={'今日の予定'} link="dashboard">
                 <IconHome />
