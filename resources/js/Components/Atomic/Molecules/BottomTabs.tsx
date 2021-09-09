@@ -24,9 +24,12 @@ export const IconLink: React.FC<Props> = ({name, link, children}) => {
             )}>
                 {children}
             </div>
-            <span className={cn('text-gray-700 text-base tracking-tighter', {'text-blue-500': active})}>
-            {name}
-        </span>
+            <span className={cn(
+                'text-gray-700 text-base tracking-tighter',
+                {'text-blue-500': active}
+            )}>
+                {name}
+            </span>
         </InertiaLink>
     );
 };
@@ -34,16 +37,16 @@ export const IconLink: React.FC<Props> = ({name, link, children}) => {
 export const BottomTabs: React.FC = () => (
     <footer className="sm:hidden bottom-0 shadow-2xl border-t w-screen fixed z-50 bg-white">
         <div className="items-cent flex items-center justify-center justify-items-center max-w-5xl mx-auto my-3">
-            <IconLink name={'今日の予定'} link="dashboard">
-                <IconHome />
+            <IconLink name="今日の予定" link="dashboard">
+                <IconHome/>
             </IconLink>
 
-            <IconLink name={'発見する'} link="#">
-                <IconSearch />
+            <IconLink name="発見する" link="#">
+                <IconSearch/>
             </IconLink>
 
-            <IconLink name={'お気に入り'} link="#">
-                <IconHeart />
+            <IconLink name="お気に入り" link="#">
+                <IconHeart/>
             </IconLink>
         </div>
     </footer>
