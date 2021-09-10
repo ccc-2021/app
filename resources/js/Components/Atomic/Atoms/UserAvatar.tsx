@@ -5,12 +5,14 @@ type Props = {
     profile_photo_url: string;
 };
 
-export const UserAvatar: React.FC<{ user: Props }> = (props) => {
+export const UserAvatar: React.FC<{ user: Props }> = ({user}) => {
+    const {name, profile_photo_url} = user;
+
     return (
         <img
-            src={props.user.profile_photo_url}
-            alt={props.user.name}
+            src={profile_photo_url}
+            alt={name}
             className="inline-block h-9 w-9 rounded-full select-none"
         />
     )
-}
+};
