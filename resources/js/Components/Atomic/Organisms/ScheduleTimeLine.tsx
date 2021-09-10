@@ -7,9 +7,9 @@ export const ScheduleTimeLine: React.FC<{ schedules: Schedule[], per_page?: numb
 
     return (
         <>
-            {schedules.map((schedule, i) => {
-                return (<ArticleCard key={i} schedule={schedule}/>)
-            })}
+            {schedules.map((schedule, i) => (
+                <ArticleCard key={i} schedule={schedule} />
+            ))}
         </>
     )
 };

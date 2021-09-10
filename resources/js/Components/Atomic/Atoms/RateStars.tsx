@@ -1,14 +1,10 @@
 import React from "react";
-import {StarIcon} from "@/Components/Atomic/Atoms/StarIcon";
+import {IconStar} from "@/Components/Icons/IconStar";
 
-export const RateStars: React.FC<{ rate: number }> = ({ rate, }) => (
+export const RateStars: React.FC<{ rate: number }> = ({ rate }) => (
     <>
-        {[...Array(rate)].map((value, i) => (
-            <StarIcon key={i}/>
-        ))}
-
-        {[...Array(5 - rate)].map((value, i) => (
-            <StarIcon key={`disable-${i}`} disable={true}/>
+        {[...Array(5)].map((value, i) => (
+            <IconStar key={i} {...(i >= rate ? {disable: true} : {})} />
         ))}
     </>
 )
