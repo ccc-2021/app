@@ -122,11 +122,11 @@ class User extends Authenticatable
     }
 
     /**
-     * Return the user posted todos.
+     * Return the user posted TODOs.
      *
      * @return HasMany
      */
-    public function todos()
+    public function todos(): HasMany
     {
         return $this->hasMany(Todo::class);
     }
@@ -136,7 +136,7 @@ class User extends Authenticatable
      *
      * @return HasMany
      */
-    public function todayTodo()
+    public function todayTodo(): HasMany
     {
         return $this->hasMany(Todo::class)
             ->whereDate('created_at', today());
