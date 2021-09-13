@@ -122,6 +122,27 @@ class User extends Authenticatable
     }
 
     /**
+     * Return the user posted todos.
+     *
+     * @return HasMany
+     */
+    public function todos()
+    {
+        return $this->hasMany(Todo::class);
+    }
+
+    /**
+     * Return user posted TODOs that are due today.
+     *
+     * @return HasMany
+     */
+    public function todayTodo()
+    {
+        return $this->hasMany(Todo::class)
+            ->whereDate('created_at', today());
+    }
+
+    /**
      * Return the user's schedule.
      *
      * @return HasMany

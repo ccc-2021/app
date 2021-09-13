@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Schedule;
+use App\Models\Todo;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -26,7 +27,10 @@ class UserSeeder extends Seeder
         User::factory()
             ->count(100)
             ->has(
-                Schedule::factory()->count(5)
+                Schedule::factory()->count(5),
+            )
+            ->has(
+                Todo::factory()->count(10)
             )
             ->create();
     }
