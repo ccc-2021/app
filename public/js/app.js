@@ -8371,6 +8371,21 @@ function getDefaultAdapter() {
   return adapter;
 }
 
+function stringifySafely(rawValue, parser, encoder) {
+  if (utils.isString(rawValue)) {
+    try {
+      (parser || JSON.parse)(rawValue);
+      return utils.trim(rawValue);
+    } catch (e) {
+      if (e.name !== 'SyntaxError') {
+        throw e;
+      }
+    }
+  }
+
+  return (encoder || JSON.stringify)(rawValue);
+}
+
 var defaults = {
 
   transitional: {
@@ -8403,7 +8418,7 @@ var defaults = {
     }
     if (utils.isObject(data) || (headers && headers['Content-Type'] === 'application/json')) {
       setContentTypeIfUnset(headers, 'application/json');
-      return JSON.stringify(data);
+      return stringifySafely(data);
     }
     return data;
   }],
@@ -9997,10 +10012,13 @@ exports.UserAvatar = void 0;
 
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-var UserAvatar = function UserAvatar(props) {
+var UserAvatar = function UserAvatar(_a) {
+  var user = _a.user;
+  var name = user.name,
+      profile_photo_url = user.profile_photo_url;
   return react_1["default"].createElement("img", {
-    src: props.user.profile_photo_url,
-    alt: props.user.name,
+    src: profile_photo_url,
+    alt: name,
     className: "inline-block h-9 w-9 rounded-full select-none"
   });
 };
@@ -10231,6 +10249,61 @@ exports.SiteHeader = SiteHeader;
 
 /***/ }),
 
+/***/ "./resources/js/Components/Atomic/Molecules/Todolist.tsx":
+/*!***************************************************************!*\
+  !*** ./resources/js/Components/Atomic/Molecules/Todolist.tsx ***!
+  \***************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.ArticleCardTodo = void 0;
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var UserAvatar_1 = __webpack_require__(/*! @/Components/Atomic/Atoms/UserAvatar */ "./resources/js/Components/Atomic/Atoms/UserAvatar.tsx");
+
+var ArticleCardTodo = function ArticleCardTodo(props) {
+  var _a = props.Todolist,
+      title = _a.title,
+      content = _a.content,
+      period_day = _a.period_day,
+      user = _a.user;
+  return react_1["default"].createElement("article", {
+    className: "mt-6"
+  }, react_1["default"].createElement("div", {
+    className: "mx-auto max-w-4xl px-10 py-6 bg-white rounded-lg shadow-md"
+  }, react_1["default"].createElement("div", {
+    className: "mt-2"
+  }, react_1["default"].createElement("h2", {
+    className: "text-2xl text-gray-700 font-bold"
+  }, "Todo:", title), react_1["default"].createElement("div", {
+    className: "flex items-center"
+  }, react_1["default"].createElement(UserAvatar_1.UserAvatar, {
+    user: user
+  }), react_1["default"].createElement("span", {
+    className: "mx-1 text-gray-600"
+  }, user.name)), react_1["default"].createElement("div", null, react_1["default"].createElement("div", {
+    className: "flex items-center"
+  }, "\u671F\u9650\u65E5:", period_day)), react_1["default"].createElement("p", {
+    className: "mt-2 text-gray-800 text-md"
+  }, content))));
+};
+
+exports.ArticleCardTodo = ArticleCardTodo;
+
+/***/ }),
+
 /***/ "./resources/js/Components/Atomic/Organisms/ScheduleTimeLine.tsx":
 /*!***********************************************************************!*\
   !*** ./resources/js/Components/Atomic/Organisms/ScheduleTimeLine.tsx ***!
@@ -10266,6 +10339,44 @@ var ScheduleTimeLine = function ScheduleTimeLine(props) {
 };
 
 exports.ScheduleTimeLine = ScheduleTimeLine;
+
+/***/ }),
+
+/***/ "./resources/js/Components/Atomic/Organisms/TodolistLine.tsx":
+/*!*******************************************************************!*\
+  !*** ./resources/js/Components/Atomic/Organisms/TodolistLine.tsx ***!
+  \*******************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.TodolistLine = void 0;
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var Todolist_1 = __webpack_require__(/*! @/Components/Atomic/Molecules/Todolist */ "./resources/js/Components/Atomic/Molecules/Todolist.tsx");
+
+var TodolistLine = function TodolistLine(props) {
+  var Todos = props.Todos;
+  return react_1["default"].createElement(react_1["default"].Fragment, null, Todos.map(function (Todo, i) {
+    return react_1["default"].createElement(Todolist_1.ArticleCardTodo, {
+      key: i,
+      Todolist: Todo
+    });
+  }));
+};
+
+exports.TodolistLine = TodolistLine;
 
 /***/ }),
 
@@ -11274,9 +11385,55 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 
 var Authenticated_1 = __importDefault(__webpack_require__(/*! @/Layouts/Authenticated */ "./resources/js/Layouts/Authenticated.tsx"));
 
-var ScheduleTimeLine_1 = __webpack_require__(/*! @/Components/Atomic/Organisms/ScheduleTimeLine */ "./resources/js/Components/Atomic/Organisms/ScheduleTimeLine.tsx");
+var TodolistLine_1 = __webpack_require__(/*! @/Components/Atomic/Organisms/TodolistLine */ "./resources/js/Components/Atomic/Organisms/TodolistLine.tsx");
 
 function Dashboard(props) {
+  var todos = props.Todos;
+  return react_1["default"].createElement(Authenticated_1["default"], {
+    auth: props.auth,
+    errors: props.errors,
+    header: react_1["default"].createElement("h2", {
+      className: "text-xl text-gray-800 leading-tight"
+    }, "\u4ECA\u65E5\u306E\u4E88\u5B9A2")
+  }, react_1["default"].createElement("div", {
+    className: "py-12"
+  }, react_1["default"].createElement("div", {
+    className: "max-w-7xl mx-auto sm:px-6 lg:px-8"
+  }, react_1["default"].createElement(TodolistLine_1.TodolistLine, {
+    Todos: todos
+  }))));
+}
+
+exports["default"] = Dashboard;
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Dashboard_sch.tsx":
+/*!**********************************************!*\
+  !*** ./resources/js/Pages/Dashboard_sch.tsx ***!
+  \**********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var Authenticated_1 = __importDefault(__webpack_require__(/*! @/Layouts/Authenticated */ "./resources/js/Layouts/Authenticated.tsx"));
+
+var ScheduleTimeLine_1 = __webpack_require__(/*! @/Components/Atomic/Organisms/ScheduleTimeLine */ "./resources/js/Components/Atomic/Organisms/ScheduleTimeLine.tsx");
+
+function Dashboard_sch(props) {
   var schedules = props.schedules;
   return react_1["default"].createElement(Authenticated_1["default"], {
     auth: props.auth,
@@ -11293,7 +11450,7 @@ function Dashboard(props) {
   }))));
 }
 
-exports["default"] = Dashboard;
+exports["default"] = Dashboard_sch;
 
 /***/ }),
 
@@ -64774,6 +64931,8 @@ var map = {
 	"./Auth/VerifyEmail.tsx": "./resources/js/Pages/Auth/VerifyEmail.tsx",
 	"./Dashboard": "./resources/js/Pages/Dashboard.tsx",
 	"./Dashboard.tsx": "./resources/js/Pages/Dashboard.tsx",
+	"./Dashboard_sch": "./resources/js/Pages/Dashboard_sch.tsx",
+	"./Dashboard_sch.tsx": "./resources/js/Pages/Dashboard_sch.tsx",
 	"./Welcome": "./resources/js/Pages/Welcome.tsx",
 	"./Welcome.tsx": "./resources/js/Pages/Welcome.tsx"
 };
@@ -64817,7 +64976,7 @@ webpackContext.id = "./resources/js/Pages sync recursive ^\\.\\/.*$";
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"_args":[["axios@0.21.3","/Users/kai/Documents/GitHub/app"]],"_development":true,"_from":"axios@0.21.3","_id":"axios@0.21.3","_inBundle":false,"_integrity":"sha512-JtoZ3Ndke/+Iwt5n+BgSli/3idTvpt5OjKyoCmz4LX5+lPiY5l7C1colYezhlxThjNa/NhngCUWZSZFypIFuaA==","_location":"/axios","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"axios@0.21.3","name":"axios","escapedName":"axios","rawSpec":"0.21.3","saveSpec":null,"fetchSpec":"0.21.3"},"_requiredBy":["#DEV:/","/@inertiajs/inertia"],"_resolved":"https://registry.npmjs.org/axios/-/axios-0.21.3.tgz","_spec":"0.21.3","_where":"/Users/kai/Documents/GitHub/app","author":{"name":"Matt Zabriskie"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"bugs":{"url":"https://github.com/axios/axios/issues"},"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}],"dependencies":{"follow-redirects":"^1.14.0"},"description":"Promise based HTTP client for the browser and node.js","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"homepage":"https://axios-http.com","jsdelivr":"dist/axios.min.js","keywords":["xhr","http","ajax","promise","node"],"license":"MIT","main":"index.js","name":"axios","repository":{"type":"git","url":"git+https://github.com/axios/axios.git"},"scripts":{"build":"NODE_ENV=production grunt build","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","examples":"node ./examples/server.js","fix":"eslint --fix lib/**/*.js","postversion":"git push && git push --tags","preversion":"npm test","start":"node ./sandbox/server.js","test":"grunt test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"},"typings":"./index.d.ts","unpkg":"dist/axios.min.js","version":"0.21.3"}');
+module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"Promise based HTTP client for the browser and node.js","main":"index.js","scripts":{"test":"grunt test","start":"node ./sandbox/server.js","build":"NODE_ENV=production grunt build","preversion":"npm test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json","postversion":"git push && git push --tags","examples":"node ./examples/server.js","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","fix":"eslint --fix lib/**/*.js"},"repository":{"type":"git","url":"https://github.com/axios/axios.git"},"keywords":["xhr","http","ajax","promise","node"],"author":"Matt Zabriskie","license":"MIT","bugs":{"url":"https://github.com/axios/axios/issues"},"homepage":"https://axios-http.com","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"jsdelivr":"dist/axios.min.js","unpkg":"dist/axios.min.js","typings":"./index.d.ts","dependencies":{"follow-redirects":"^1.14.0"},"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}]}');
 
 /***/ })
 

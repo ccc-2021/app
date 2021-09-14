@@ -26,7 +26,8 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard', [
-        'schedules' => \App\Models\Schedule::with('user:id,name')->get()->take(10),
+        // 'schedules' => \App\Models\Schedule::with('user:id,name')->get()->take(10),
+        'Todos' => \App\Models\Todo::with('user:id,name')->get()->take(10),
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
