@@ -2,9 +2,8 @@ import React from 'react';
 import { UserAvatar } from "@/Components/Atomic/Atoms/UserAvatar";
 import { Todo } from "@/types";
 
-export const ArticleCardTodo: React.FC<{ Todolist: Todo }> = (props) => {
+export const ArticleCardTodo: React.FC<{ Todolist: Todo, }> = (props) => {
     const { title, content, period_day, user, } = props.Todolist;
-
     return (
         <article className="mt-6">
             <div className="mx-auto max-w-4xl px-10 py-6 bg-white rounded-lg shadow-md">
