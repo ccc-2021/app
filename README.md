@@ -57,3 +57,17 @@ DB_PASSWORD=password
 ## Accesses
 
 Now, you can access the application in your web browser at: [http://localhost](http://localhost).
+
+## Commit Message
+
+Must be one of the following:
+
+* feat: 新しい機能
+* design: デザインに関する修正
+* fix: バグの修正
+* docs: ドキュメントのみの変更
+* style: 空白、フォーマット、セミコロン追加など
+* refactor: 仕様に影響がないコード改善(リファクタ)
+* perf: パフォーマンス向上関連
+* test: テスト関連
+* chore: ビルド、補助ツール、ライブラリ関連
