@@ -10271,14 +10271,12 @@ exports.ArticleCardTodo = void 0;
 
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-var UserAvatar_1 = __webpack_require__(/*! @/Components/Atomic/Atoms/UserAvatar */ "./resources/js/Components/Atomic/Atoms/UserAvatar.tsx");
-
 var ArticleCardTodo = function ArticleCardTodo(props) {
   var _a = props.Todolist,
       title = _a.title,
       content = _a.content,
       period_day = _a.period_day,
-      user = _a.user;
+      auth = _a.auth;
   return react_1["default"].createElement("article", {
     className: "mt-6"
   }, react_1["default"].createElement("div", {
@@ -10289,11 +10287,7 @@ var ArticleCardTodo = function ArticleCardTodo(props) {
     className: "text-2xl text-gray-700 font-bold"
   }, "Todo:", title), react_1["default"].createElement("div", {
     className: "flex items-center"
-  }, react_1["default"].createElement(UserAvatar_1.UserAvatar, {
-    user: user
-  }), react_1["default"].createElement("span", {
-    className: "mx-1 text-gray-600"
-  }, user.name)), react_1["default"].createElement("div", null, react_1["default"].createElement("div", {
+  }), react_1["default"].createElement("div", null, react_1["default"].createElement("div", {
     className: "flex items-center"
   }, "\u671F\u9650\u65E5:", period_day)), react_1["default"].createElement("p", {
     className: "mt-2 text-gray-800 text-md"

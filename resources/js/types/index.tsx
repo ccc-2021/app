@@ -26,8 +26,14 @@ export type Todo = {
     status: string;
     created_at: string;
     update_at: string;
-    user: {
-        name: string;
-        profile_photo_url: string;
+    auth: {
+        user: {
+            name: string;
+            profile_photo_url: string;
+        }
     };
+    // user: {
+    //     name: string;
+    //     profile_photo_url: string;
+    // }
 }

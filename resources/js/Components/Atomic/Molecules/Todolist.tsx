@@ -1,9 +1,9 @@
 import React from 'react';
 import { UserAvatar } from "@/Components/Atomic/Atoms/UserAvatar";
-import { Todo } from "@/types";
+import { Todo, Schedule } from "@/types";
 
 export const ArticleCardTodo: React.FC<{ Todolist: Todo, }> = (props) => {
-    const { title, content, period_day, user, } = props.Todolist;
+    const { title, content, period_day, auth } = props.Todolist;
     return (
         <article className="mt-6">
             <div className="mx-auto max-w-4xl px-10 py-6 bg-white rounded-lg shadow-md">
@@ -12,10 +12,9 @@ export const ArticleCardTodo: React.FC<{ Todolist: Todo, }> = (props) => {
                         Todo:{title}
                     </h2>
                     <div className="flex items-center">
-                        <UserAvatar user={user} />
-                        <span className="mx-1 text-gray-600">
-                            {user.name}
-                        </span>
+                        {/* <span className="mx-1 text-gray-600">
+                            {auth.user.name}
+                        </span> */}
                     </div>
                     <div>
                         <div className="flex items-center">
