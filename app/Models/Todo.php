@@ -38,7 +38,7 @@ class Todo extends Model
      * @var array
      */
     protected $casts = [
-        // 'period_day' => 'date',
+        'period_day' => 'datetime',
         'is_repetition' => 'boolean'
     ];
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TodosController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -24,10 +25,15 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard', [
-        'schedules' => \App\Models\Schedule::with('user:id,name')->get()->take(10),
-    ]);
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::group(['middleware' => ['auth', 'verified']], function () {
+
+    Route::get('/dashboard', function () {
+        return Inertia::render('Dashboard', [
+            'schedules' => \App\Models\Schedule::with('user:id,name')->get()->take(10),
+        ]);
+    })->name('dashboard');
+
+    Route::resource('todos', TodosController::class);
+});
 
 require __DIR__ . '/auth.php';
