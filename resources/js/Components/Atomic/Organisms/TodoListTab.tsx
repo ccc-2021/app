@@ -2,23 +2,32 @@ import React, {useState} from "react";
 import {Tab} from "@headlessui/react";
 import classNames from "classnames";
 
-export const TodoListTab: React.FC<{ todos: any }> = ({ todos }) => {
+type Todo = {
+    id: number;
+    user_id: number;
+    title: string;
+    content?: string;
+    created_at: string;
+    status: string;
+    is_repetition: boolean;
+}
 
-    const labels: { "1": string; "2": string } = {
-        1: 'TODO',
-        2: '消毒済み',
-    }
+export const TodoListTab: React.FC<{ todos: Todo[] }> = ({todos}) => {
+
+    const labels = ['TODO', '消毒済み',];
 
     let [categories]: any = useState(todos);
 
     return (
         <div className="w-full max-w-2xl sm:px-0 mx-auto">
             <Tab.Group>
-                <Tab.List className="flex p-1 space-x-1 bg-blue-900/20 rounded-xl max-2-md">
-                    {Object.keys(categories).map((category) => (
+                <Tab.List
+                    className="flex p-1 space-x-1 bg-blue-900/20 rounded-xl max-2-md"
+                >
+                    {labels.map((label, key) => (
                         <Tab
-                            key={category}
-                            className={({ selected }) =>
+                            key={key}
+                            className={({selected}) =>
                                 classNames(
                                     'w-full py-2.5 text-sm leading-5 font-medium rounded-lg select-none',
                                     'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60',
@@ -28,33 +37,31 @@ export const TodoListTab: React.FC<{ todos: any }> = ({ todos }) => {
                                 )
                             }
                         >
-                            {labels[category]}
+                            {label}
                         </Tab>
                     ))}
                 </Tab.List>
+
                 <Tab.Panels className="mt-2">
-                    {Object.values(categories).map((todos, idx) => (
+                    {Object.values(categories).map((category, categoryKey) => (
                         <Tab.Panel
-                            key={idx}
+                            key={categoryKey}
                             className={classNames(
-                                'bg-white rounded-xl p-3 select-none',
+                                'bg-white sm:rounded-xl p-3 select-none',
                                 'ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60'
                             )}
                         >
                             <ul>
-                                {todos.map((todo: any) => (
-                                    <li
-                                        key={todo.id}
-                                        className="relative p-3 rounded-md hover:bg-coolGray-100"
-                                    >
-
-                                        <label className="inline-flex items-center">
-                                            <input
-                                                type="checkbox"
-                                                className="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-offset-0 focus:ring-indigo-200 focus:ring-opacity-50"
-                                            />
-                                                <span className="ml-2">{todo.title}</span>
-                                        </label>
+                                {Object.entries(category).map((date, dateKey) => (
+                                    <li key={`date-${dateKey}`}>
+                                        <span className="text-3xl font-bold ml-5">
+                                            {date[0]}
+                                        </span>
+                                        <ul className="ml-10">
+                                            {Object.values(date[1]).map((todo, todoKey) => (
+                                                <li key={`todo-${todoKey}`}>{todo.title}</li>
+                                            ))}
+                                        </ul>
                                     </li>
                                 ))}
                             </ul>

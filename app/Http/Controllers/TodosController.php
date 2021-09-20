@@ -20,7 +20,12 @@ class TodosController extends Controller
 
         $data = Auth::user()?->todos()->oldest('period_day')->get();
 
-        $todos = $data->groupBy('status');
+        $todos = $data->groupBy([
+            'status',
+            function ($item) {
+                return $item->period_day->format('Y-m-d');
+            }
+        ]);
 
         return Inertia::render('Todos/Index', compact('todos'));
     }
@@ -38,7 +43,7 @@ class TodosController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -49,7 +54,7 @@ class TodosController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -60,7 +65,7 @@ class TodosController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -71,8 +76,8 @@ class TodosController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -83,7 +88,7 @@ class TodosController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
