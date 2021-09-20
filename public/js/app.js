@@ -9724,7 +9724,8 @@ var Input = function Input(_a) {
       autoComplete = _a.autoComplete,
       required = _a.required,
       isFocused = _a.isFocused,
-      handleChange = _a.handleChange;
+      handleChange = _a.handleChange,
+      placeholder = _a.placeholder;
   var input = (0, react_1.useRef)(null);
   (0, react_1.useEffect)(function () {
     var _a;
@@ -9745,7 +9746,8 @@ var Input = function Input(_a) {
     required: required,
     onChange: function onChange(e) {
       return handleChange(e);
-    }
+    },
+    placeholder: placeholder
   }));
 };
 
@@ -9788,43 +9790,6 @@ var Label = function Label(_a) {
 };
 
 exports["default"] = Label;
-
-/***/ }),
-
-/***/ "./resources/js/Components/Atomic/Atoms/NavLink.tsx":
-/*!**********************************************************!*\
-  !*** ./resources/js/Components/Atomic/Atoms/NavLink.tsx ***!
-  \**********************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-
-var inertia_react_1 = __webpack_require__(/*! @inertiajs/inertia-react */ "./node_modules/@inertiajs/inertia-react/dist/index.js");
-
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-function NavLink(_a) {
-  var href = _a.href,
-      active = _a.active,
-      children = _a.children;
-  return react_1["default"].createElement(inertia_react_1.InertiaLink, {
-    href: href,
-    className: active ? 'inline-flex items-center px-1 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out' : 'inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out'
-  }, children);
-}
-
-exports["default"] = NavLink;
 
 /***/ }),
 
@@ -9893,6 +9858,51 @@ exports.RateStars = RateStars;
 
 /***/ }),
 
+/***/ "./resources/js/Components/Atomic/Atoms/TextArea.tsx":
+/*!***********************************************************!*\
+  !*** ./resources/js/Components/Atomic/Atoms/TextArea.tsx ***!
+  \***********************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.TextArea = void 0;
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var TextArea = function TextArea(_a) {
+  var name = _a.name,
+      value = _a.value,
+      className = _a.className,
+      autoComplete = _a.autoComplete,
+      required = _a.required,
+      isFocused = _a.isFocused,
+      handleChange = _a.handleChange,
+      placeholder = _a.placeholder;
+  return react_1["default"].createElement("textarea", {
+    id: "about",
+    name: "about",
+    rows: 3,
+    className: "border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block w-full sm:text-sm border" + className,
+    placeholder: placeholder,
+    defaultValue: value ? value : ''
+  });
+};
+
+exports.TextArea = TextArea;
+
+/***/ }),
+
 /***/ "./resources/js/Components/Atomic/Atoms/TopNavbar.tsx":
 /*!************************************************************!*\
   !*** ./resources/js/Components/Atomic/Atoms/TopNavbar.tsx ***!
@@ -9919,8 +9929,6 @@ var inertia_react_1 = __webpack_require__(/*! @inertiajs/inertia-react */ "./nod
 
 var ApplicationLogo_1 = __importDefault(__webpack_require__(/*! @/Components/Atomic/Atoms/ApplicationLogo */ "./resources/js/Components/Atomic/Atoms/ApplicationLogo.tsx"));
 
-var NavLink_1 = __importDefault(__webpack_require__(/*! @/Components/Atomic/Atoms/NavLink */ "./resources/js/Components/Atomic/Atoms/NavLink.tsx"));
-
 var ziggy_js_1 = __importDefault(__webpack_require__(/*! ziggy-js */ "./node_modules/ziggy-js/dist/index.js"));
 
 var Dropdown_1 = __importDefault(__webpack_require__(/*! @/Components/Atomic/Atoms/Dropdown */ "./resources/js/Components/Atomic/Atoms/Dropdown.tsx"));
@@ -9943,10 +9951,7 @@ var TopNavbar = function TopNavbar(_a) {
     className: "block h-9 w-auto text-gray-500"
   }))), react_1["default"].createElement("div", {
     className: "hidden space-x-8 sm:-my-px sm:ml-10 sm:flex"
-  }, react_1["default"].createElement(NavLink_1["default"], {
-    href: (0, ziggy_js_1["default"])("dashboard"),
-    active: (0, ziggy_js_1["default"])().current("dashboard")
-  }, "\u4ECA\u65E5\u306E\u4E88\u5B9A"))), react_1["default"].createElement("div", {
+  })), react_1["default"].createElement("div", {
     className: "flex items-center sm:ml-6"
   }, react_1["default"].createElement("div", {
     className: "ml-3 relative"
@@ -9997,10 +10002,13 @@ exports.UserAvatar = void 0;
 
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-var UserAvatar = function UserAvatar(props) {
+var UserAvatar = function UserAvatar(_a) {
+  var user = _a.user;
+  var name = user.name,
+      profile_photo_url = user.profile_photo_url;
   return react_1["default"].createElement("img", {
-    src: props.user.profile_photo_url,
-    alt: props.user.name,
+    src: profile_photo_url,
+    alt: name,
     className: "inline-block h-9 w-9 rounded-full select-none"
   });
 };
@@ -10115,10 +10123,10 @@ exports.ArticleCard = ArticleCard;
 
 /***/ }),
 
-/***/ "./resources/js/Components/Atomic/Molecules/BottomTabs.tsx":
-/*!*****************************************************************!*\
-  !*** ./resources/js/Components/Atomic/Molecules/BottomTabs.tsx ***!
-  \*****************************************************************/
+/***/ "./resources/js/Components/Atomic/Molecules/CreateTodoForm.tsx":
+/*!*********************************************************************!*\
+  !*** ./resources/js/Components/Atomic/Molecules/CreateTodoForm.tsx ***!
+  \*********************************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -10133,61 +10141,56 @@ var __importDefault = this && this.__importDefault || function (mod) {
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.BottomTabs = exports.IconLink = void 0;
+exports.CreateTodoForm = void 0;
 
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-var classnames_1 = __importDefault(__webpack_require__(/*! classnames */ "./node_modules/classnames/index.js"));
+var Input_1 = __importDefault(__webpack_require__(/*! @/Components/Atomic/Atoms/Input */ "./resources/js/Components/Atomic/Atoms/Input.tsx"));
 
-var ziggy_js_1 = __importDefault(__webpack_require__(/*! ziggy-js */ "./node_modules/ziggy-js/dist/index.js"));
-
-var IconHome_1 = __importDefault(__webpack_require__(/*! @/Components/Icons/IconHome */ "./resources/js/Components/Icons/IconHome.tsx"));
-
-var IconSearch_1 = __importDefault(__webpack_require__(/*! @/Components/Icons/IconSearch */ "./resources/js/Components/Icons/IconSearch.tsx"));
-
-var IconHeart_1 = __importDefault(__webpack_require__(/*! @/Components/Icons/IconHeart */ "./resources/js/Components/Icons/IconHeart.tsx"));
+var TextArea_1 = __webpack_require__(/*! @/Components/Atomic/Atoms/TextArea */ "./resources/js/Components/Atomic/Atoms/TextArea.tsx");
 
 var inertia_react_1 = __webpack_require__(/*! @inertiajs/inertia-react */ "./node_modules/@inertiajs/inertia-react/dist/index.js");
 
-var IconLink = function IconLink(_a) {
-  var name = _a.name,
-      link = _a.link,
-      children = _a.children;
-  var active = (0, ziggy_js_1["default"])().current(link);
-  return react_1["default"].createElement(inertia_react_1.InertiaLink, {
-    href: link,
-    className: 'w-full flex flex-col self-center text-center'
-  }, react_1["default"].createElement("div", {
-    className: (0, classnames_1["default"])('block w-7 h-7 fill-current text-gray-500 mx-auto', {
-      'text-blue-500': active
-    })
-  }, children), react_1["default"].createElement("span", {
-    className: (0, classnames_1["default"])('text-gray-700 text-base tracking-tighter', {
-      'text-blue-500': active
-    })
-  }, name));
+var CreateTodoForm = function CreateTodoForm() {
+  var _a = (0, inertia_react_1.useForm)({
+    name: '',
+    email: '',
+    password: '',
+    password_confirmation: ''
+  }),
+      data = _a.data,
+      setData = _a.setData,
+      post = _a.post,
+      processing = _a.processing,
+      errors = _a.errors,
+      reset = _a.reset;
+
+  var onHandleChange = function onHandleChange(event) {
+    setData(event.target.name, event.target.type === 'checkbox' ? event.target.checked + '' : event.target.value);
+  };
+
+  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement("div", {
+    className: "bg-gray-200 w-full"
+  }, react_1["default"].createElement("h2", {
+    className: "text-center text-2xl font-semibold"
+  }, "\u65B0\u3057\u3044TODO"), react_1["default"].createElement("div", {
+    className: "m-5"
+  }, react_1["default"].createElement(Input_1["default"], {
+    type: "text",
+    name: "title",
+    value: "",
+    className: "mt-1 block w-full",
+    autoComplete: "new-password",
+    isFocused: true,
+    handleChange: onHandleChange,
+    placeholder: "\u30BF\u30A4\u30C8\u30EB\u3092\u8FFD\u52A0"
+  }), react_1["default"].createElement(TextArea_1.TextArea, {
+    placeholder: "\u8AAC\u660E\u6587\u3092\u8FFD\u52A0",
+    handleChange: onHandleChange
+  }))));
 };
 
-exports.IconLink = IconLink;
-
-var BottomTabs = function BottomTabs() {
-  return react_1["default"].createElement("footer", {
-    className: "sm:hidden bottom-0 shadow-2xl border-t w-screen fixed z-50 bg-white"
-  }, react_1["default"].createElement("div", {
-    className: "items-cent flex items-center justify-center justify-items-center max-w-5xl mx-auto my-3"
-  }, react_1["default"].createElement(exports.IconLink, {
-    name: "\u4ECA\u65E5\u306E\u4E88\u5B9A",
-    link: "dashboard"
-  }, react_1["default"].createElement(IconHome_1["default"], null)), react_1["default"].createElement(exports.IconLink, {
-    name: "\u767A\u898B\u3059\u308B",
-    link: "#"
-  }, react_1["default"].createElement(IconSearch_1["default"], null)), react_1["default"].createElement(exports.IconLink, {
-    name: "\u304A\u6C17\u306B\u5165\u308A",
-    link: "#"
-  }, react_1["default"].createElement(IconHeart_1["default"], null))));
-};
-
-exports.BottomTabs = BottomTabs;
+exports.CreateTodoForm = CreateTodoForm;
 
 /***/ }),
 
@@ -10269,14 +10272,48 @@ exports.ScheduleTimeLine = ScheduleTimeLine;
 
 /***/ }),
 
-/***/ "./resources/js/Components/Icons/IconHeart.tsx":
-/*!*****************************************************!*\
-  !*** ./resources/js/Components/Icons/IconHeart.tsx ***!
-  \*****************************************************/
+/***/ "./resources/js/Components/Atomic/Organisms/TodoListTab.tsx":
+/*!******************************************************************!*\
+  !*** ./resources/js/Components/Atomic/Organisms/TodoListTab.tsx ***!
+  \******************************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
 
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
 
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
@@ -10287,90 +10324,56 @@ var __importDefault = this && this.__importDefault || function (mod) {
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
+exports.TodoListTab = void 0;
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-function IconHeart() {
-  return react_1["default"].createElement("svg", {
-    fill: "currentColor",
-    viewBox: "0 0 20 20",
-    xmlns: "http://www.w3.org/2000/svg"
-  }, react_1["default"].createElement("path", {
-    d: "M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-  }));
-}
+var react_2 = __webpack_require__(/*! @headlessui/react */ "./node_modules/@headlessui/react/dist/index.esm.js");
 
-exports["default"] = IconHeart;
+var classnames_1 = __importDefault(__webpack_require__(/*! classnames */ "./node_modules/classnames/index.js"));
 
-/***/ }),
-
-/***/ "./resources/js/Components/Icons/IconHome.tsx":
-/*!****************************************************!*\
-  !*** ./resources/js/Components/Icons/IconHome.tsx ***!
-  \****************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
+var TodoListTab = function TodoListTab(_a) {
+  var todos = _a.todos;
+  var labels = {
+    1: 'TODO',
+    2: '消毒済み'
   };
+  var categories = (0, react_1.useState)(todos)[0];
+  return react_1["default"].createElement("div", {
+    className: "w-full max-w-2xl sm:px-0 mx-auto"
+  }, react_1["default"].createElement(react_2.Tab.Group, null, react_1["default"].createElement(react_2.Tab.List, {
+    className: "flex p-1 space-x-1 bg-blue-900/20 rounded-xl max-2-md"
+  }, Object.keys(categories).map(function (category) {
+    return react_1["default"].createElement(react_2.Tab, {
+      key: category,
+      className: function className(_a) {
+        var selected = _a.selected;
+        return (0, classnames_1["default"])('w-full py-2.5 text-sm leading-5 font-medium rounded-lg select-none', 'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60', selected ? 'bg-blue-500 text-white shadow' : 'text-blue-700');
+      }
+    }, labels[category]);
+  })), react_1["default"].createElement(react_2.Tab.Panels, {
+    className: "mt-2"
+  }, Object.values(categories).map(function (todos, idx) {
+    return react_1["default"].createElement(react_2.Tab.Panel, {
+      key: idx,
+      className: (0, classnames_1["default"])('bg-white rounded-xl p-3 select-none', 'ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60')
+    }, react_1["default"].createElement("ul", null, todos.map(function (todo) {
+      return react_1["default"].createElement("li", {
+        key: todo.id,
+        className: "relative p-3 rounded-md hover:bg-coolGray-100"
+      }, react_1["default"].createElement("label", {
+        className: "inline-flex items-center"
+      }, react_1["default"].createElement("input", {
+        type: "checkbox",
+        className: "rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-offset-0 focus:ring-indigo-200 focus:ring-opacity-50"
+      }), react_1["default"].createElement("span", {
+        className: "ml-2"
+      }, todo.title)));
+    })));
+  }))));
 };
 
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-function IconHome() {
-  return react_1["default"].createElement("svg", {
-    fill: "currentColor",
-    viewBox: "0 0 20 20",
-    xmlns: "http://www.w3.org/2000/svg"
-  }, react_1["default"].createElement("path", {
-    d: "M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"
-  }));
-}
-
-exports["default"] = IconHome;
-
-/***/ }),
-
-/***/ "./resources/js/Components/Icons/IconSearch.tsx":
-/*!******************************************************!*\
-  !*** ./resources/js/Components/Icons/IconSearch.tsx ***!
-  \******************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-function IconSearch() {
-  return react_1["default"].createElement("svg", {
-    fill: "currentColor",
-    viewBox: "0 0 20 20",
-    xmlns: "http://www.w3.org/2000/svg"
-  }, react_1["default"].createElement("path", {
-    d: "M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-  }));
-}
-
-exports["default"] = IconSearch;
+exports.TodoListTab = TodoListTab;
 
 /***/ }),
 
@@ -10441,8 +10444,6 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 
 var SiteHeader_1 = __webpack_require__(/*! @/Components/Atomic/Molecules/SiteHeader */ "./resources/js/Components/Atomic/Molecules/SiteHeader.tsx");
 
-var BottomTabs_1 = __webpack_require__(/*! @/Components/Atomic/Molecules/BottomTabs */ "./resources/js/Components/Atomic/Molecules/BottomTabs.tsx");
-
 function Authenticated(_a) {
   var auth = _a.auth,
       header = _a.header,
@@ -10452,7 +10453,7 @@ function Authenticated(_a) {
   }, react_1["default"].createElement(SiteHeader_1.SiteHeader, {
     title: header,
     auth: auth
-  }), react_1["default"].createElement("main", null, children), react_1["default"].createElement(BottomTabs_1.BottomTabs, null));
+  }), react_1["default"].createElement("main", null, children));
 }
 
 exports["default"] = Authenticated;
@@ -11294,6 +11295,91 @@ function Dashboard(props) {
 }
 
 exports["default"] = Dashboard;
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Todos/Create.tsx":
+/*!*********************************************!*\
+  !*** ./resources/js/Pages/Todos/Create.tsx ***!
+  \*********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var Authenticated_1 = __importDefault(__webpack_require__(/*! @/Layouts/Authenticated */ "./resources/js/Layouts/Authenticated.tsx"));
+
+var CreateTodoForm_1 = __webpack_require__(/*! @/Components/Atomic/Molecules/CreateTodoForm */ "./resources/js/Components/Atomic/Molecules/CreateTodoForm.tsx");
+
+function Dashboard(props) {
+  return react_1["default"].createElement(Authenticated_1["default"], {
+    auth: props.auth,
+    errors: props.errors,
+    header: react_1["default"].createElement("h2", {
+      className: "text-xl text-gray-800 leading-tight"
+    }, "\u4ECA\u65E5\u306E\u4E88\u5B9A")
+  }, react_1["default"].createElement("div", {
+    className: "py-12"
+  }, react_1["default"].createElement("div", {
+    className: "max-w-7xl mx-auto sm:px-6 lg:px-8"
+  }, react_1["default"].createElement(CreateTodoForm_1.CreateTodoForm, null))));
+}
+
+exports["default"] = Dashboard;
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Todos/Index.tsx":
+/*!********************************************!*\
+  !*** ./resources/js/Pages/Todos/Index.tsx ***!
+  \********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var Authenticated_1 = __importDefault(__webpack_require__(/*! @/Layouts/Authenticated */ "./resources/js/Layouts/Authenticated.tsx"));
+
+var TodoListTab_1 = __webpack_require__(/*! @/Components/Atomic/Organisms/TodoListTab */ "./resources/js/Components/Atomic/Organisms/TodoListTab.tsx");
+
+function Index(props) {
+  return react_1["default"].createElement(Authenticated_1["default"], {
+    auth: props.auth,
+    errors: props.errors
+  }, react_1["default"].createElement("div", {
+    className: "py-12"
+  }, react_1["default"].createElement("div", {
+    className: "max-w-7xl mx-auto sm:px-6 lg:px-8"
+  }, react_1["default"].createElement(TodoListTab_1.TodoListTab, {
+    todos: props.todos
+  }))));
+}
+
+exports["default"] = Index;
 
 /***/ }),
 
@@ -64774,6 +64860,10 @@ var map = {
 	"./Auth/VerifyEmail.tsx": "./resources/js/Pages/Auth/VerifyEmail.tsx",
 	"./Dashboard": "./resources/js/Pages/Dashboard.tsx",
 	"./Dashboard.tsx": "./resources/js/Pages/Dashboard.tsx",
+	"./Todos/Create": "./resources/js/Pages/Todos/Create.tsx",
+	"./Todos/Create.tsx": "./resources/js/Pages/Todos/Create.tsx",
+	"./Todos/Index": "./resources/js/Pages/Todos/Index.tsx",
+	"./Todos/Index.tsx": "./resources/js/Pages/Todos/Index.tsx",
 	"./Welcome": "./resources/js/Pages/Welcome.tsx",
 	"./Welcome.tsx": "./resources/js/Pages/Welcome.tsx"
 };
