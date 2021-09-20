@@ -32,8 +32,4 @@ export type Todo = {
             profile_photo_url: string;
         }
     };
-    // user: {
-    //     name: string;
-    //     profile_photo_url: string;
-    // }
 }
