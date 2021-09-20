@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {Tab} from "@headlessui/react";
 import classNames from "classnames";
 
+// TODO: Fix type of Todo
 type Todo = {
     id: number;
     user_id: number;
@@ -15,8 +16,6 @@ type Todo = {
 export const TodoListTab: React.FC<{ todos: Todo[] }> = ({todos}) => {
 
     const labels = ['TODO', '消毒済み',];
-
-    let [categories]: any = useState(todos);
 
     return (
         <div className="w-full max-w-2xl sm:px-0 mx-auto">
@@ -43,7 +42,7 @@ export const TodoListTab: React.FC<{ todos: Todo[] }> = ({todos}) => {
                 </Tab.List>
 
                 <Tab.Panels className="mt-2">
-                    {Object.values(categories).map((category, categoryKey) => (
+                    {Object.values(todos).map((category, categoryKey) => (
                         <Tab.Panel
                             key={categoryKey}
                             className={classNames(
@@ -54,9 +53,7 @@ export const TodoListTab: React.FC<{ todos: Todo[] }> = ({todos}) => {
                             <ul>
                                 {Object.entries(category).map((date, dateKey) => (
                                     <li key={`date-${dateKey}`}>
-                                        <span className="text-3xl font-bold ml-5">
-                                            {date[0]}
-                                        </span>
+                                        {date[0]}
                                         <ul className="ml-10">
                                             {Object.values(date[1]).map((todo, todoKey) => (
                                                 <li key={`todo-${todoKey}`}>{todo.title}</li>
