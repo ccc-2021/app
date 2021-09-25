@@ -5,6 +5,7 @@ interface Props {
     name: string;
     value: string;
     className?: string;
+    placeholder?: string;
     autoComplete?: string | undefined;
     required?: boolean;
     isFocused?: boolean;
@@ -16,6 +17,7 @@ const Input: React.FC<Props> = ({
     name,
     value,
     className,
+    placeholder,
     autoComplete,
     required,
     isFocused,
@@ -39,6 +41,7 @@ const Input: React.FC<Props> = ({
                     `border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm ` +
                     className
                 }
+                placeholder={placeholder ? placeholder : ''}
                 ref={input}
                 autoComplete={autoComplete}
                 required={required}
