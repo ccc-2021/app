@@ -32,6 +32,7 @@ class Todo extends Model
         'title',
         'content',
         'status',
+        'character_id',
     ];
 
     /**
