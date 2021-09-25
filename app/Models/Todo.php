@@ -25,6 +25,10 @@ class Todo extends Model
 {
     use HasFactory;
 
+    protected $with = [
+        'character'
+    ];
+
     protected $fillable = [
         'user_id',
         'period_day',
@@ -45,12 +49,27 @@ class Todo extends Model
         'is_repetition' => 'boolean'
     ];
 
+    protected $appends = [
+        'monster_image',
+        'monster_name',
+    ];
+
     public const DEFAULT = 1;
     public const DONE = 2;
 
     public function scopeToday($query): void
     {
         $query->whereDate('created_at', today());
+    }
+
+    public function getMonsterImageAttribute(): string
+    {
+        return asset('img/' . $this->character->image_photo_path);
+    }
+
+    public function getMonsterNameAttribute(): string
+    {
+        return $this->character->name ?? 'ウイルス' . $this->character->id;
     }
 
     /**

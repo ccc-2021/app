@@ -1,27 +1,35 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 
 
 interface Props {
-    processing: boolean;
+    todo: {
+        title: string;
+        monster_image: string;
+        monster_name: string;
+    }
     className?: string;
-    title: string;
-    img: string;
 }
-export const TodoButton: React.FC<Props> = ({ title, img, className = '' }) => {
-    const [select, setSelect] = useState(false);
-    console.log(select);
-    return (
-        <div className="h-32" onClick={() => setSelect(!select)}>
 
+export const TodoButton: React.FC<Props> = ({todo, className = ''}) => {
+
+    const {monster_image, monster_name, title} = todo;
+
+    const [select, setSelect] = useState(false);
+    return (
+        <div className="border border-gray-700 rounded-md" onClick={() => setSelect(!select)}>
             <button
                 className={
-                    'w-full h-36 text-center border border-gray-700 rounded-md py-2.5 font-medium row-span-1 '
+                    'w-full text-center py-2 font-medium row-span-1 flex flex-col items-center'
                     + className}
             >
-                <img src={img} alt="" className="h-28 items-center" />
+                <img
+                    src={monster_image}
+                    alt={monster_name}
+                    className="h-28 my-1"
+                />
                 {title}
             </button>
-        </div >
+        </div>
     );
 }
 

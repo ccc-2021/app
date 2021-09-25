@@ -18,8 +18,6 @@ export const TodoListTab: React.FC<{ todos: Todo[] }> = ({ todos }) => {
 
     const labels = ['TODO', '消毒済み',];
 
-    console.log(todos);
-
     return (
         <div className="w-full max-w-2xl sm:px-0 mx-auto">
             <Tab.Group>
@@ -53,20 +51,14 @@ export const TodoListTab: React.FC<{ todos: Todo[] }> = ({ todos }) => {
                                 'ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60'
                             )}
                         >
-                            <ul >
+                            <ul>
                                 {Object.entries(category).map((date, dateKey) => (
                                     <li key={`date-${dateKey}`} className="text-2xl">
                                         {date[0]}
-                                        <ul className="ml-4 mr-4 mb-6 grid  gap-8 grid-cols-2 text-base"
-                                        >
-                                            {Object.values(date[1].map((sample) => (
-                                                <TodoButton title={sample.title} className={""} />
+                                        <ul className="ml-4 mr-4 mb-6 grid  gap-8 grid-cols-2 text-base">
+                                            {Object.values(date[1].map((todo, todoKey) => (
+                                                <TodoButton todo={todo} key={`todo-${todoKey}`} />
                                             )))}
-                                            {/* 
-                                            {Object.values(date[1]).map((todo, todoKey) => (
-                                                <li key={`todo-${todoKey}`}}
-                                                    className=" w-full h-40 text-center border border-gray-700 rounded-md py-2.5 font-medium row-span-1 ">{todo.title}</li>
-                                            ))} */}
                                         </ul>
                                     </li>
                                 ))}
