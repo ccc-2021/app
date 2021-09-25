@@ -23,6 +23,9 @@ class CreateTodosTable extends Migration
                 ->constrained('users')
                 ->onDelete('cascade');
 
+            $table->foreignId('character_id')
+                ->constrained();
+
             $table->date('period_day')
                 ->nullable()
                 ->comment('期限日');

@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 
 
 interface Props {
-    children: React.ReactNode;
-    type?: "submit" | "button" | "reset" | undefined;
     processing: boolean;
     className?: string;
     title: string;

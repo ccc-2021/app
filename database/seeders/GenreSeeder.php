@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use App\Models\Genre;
 use App\Models\Schedule;
 use Exception;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\App;
 
@@ -41,7 +43,7 @@ class GenreSeeder extends Seeder
         }
     }
 
-    public function createGenre(string $name, string $detail)
+    public function createGenre(string $name, string $detail): Model|Collection
     {
         return Genre::factory()
             ->create(compact('name', 'detail'));
