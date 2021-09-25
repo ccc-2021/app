@@ -43,8 +43,7 @@ class Todo extends Model
     ];
 
     public const DEFAULT = 1;
-    public const WIP = 2;
-    public const DONE = 3;
+    public const DONE = 2;
 
     public function scopeToday($query): void
     {

@@ -17,7 +17,6 @@ class TodosController extends Controller
      */
     public function index(): Response
     {
-
         $data = Auth::user()?->todos()->oldest('period_day')->get();
 
         $todos = $data->groupBy([
@@ -33,22 +32,29 @@ class TodosController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
-        //
+        return Inertia::render('Todos/Create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return void
      */
-    public function store(Request $request)
+    public function store(Request $request): void
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|max:255',
+            'content' => 'required',
+            'period_day' => 'after:yesterday',
+            'is_repetition' => 'boolean',
+        ]);
+
+        Auth::user()->todos()->create($validated);
     }
 
     /**
@@ -76,7 +82,7 @@ class TodosController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param int $id
      * @return \Illuminate\Http\Response
      */
