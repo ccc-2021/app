@@ -16,7 +16,10 @@ export const TodoButton: React.FC<Props> = ({todo, className = ''}) => {
 
     const [select, setSelect] = useState(false);
     return (
-        <div className="border border-gray-700 rounded-md" onClick={() => setSelect(!select)}>
+        <div
+            className="border border-gray-700 rounded-md"
+            onClick={() => setSelect(!select)}
+        >
             <button
                 className={
                     'w-full text-center py-2 font-medium row-span-1 flex flex-col items-center'
