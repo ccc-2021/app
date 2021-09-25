@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 
 /**
@@ -18,6 +19,7 @@ use Illuminate\Support\Carbon;
  * @property int $status ステータス
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property mixed $character_id キャラクターID
  */
 class Todo extends Model
 {
@@ -49,5 +51,13 @@ class Todo extends Model
     public function scopeToday($query): void
     {
         $query->whereDate('created_at', today());
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function character(): BelongsTo
+    {
+        return $this->belongsTo(Character::class);
     }
 }

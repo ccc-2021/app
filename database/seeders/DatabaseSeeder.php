@@ -15,12 +15,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call(CharacterSeeder::class);
 
         if (!App::environment('production')) {
             $this->call(UserSeeder::class);
-            $this->call(ReviewSeeder::class);
         }
-
-        $this->call(GenreSeeder::class);
     }
 }

@@ -16,19 +16,20 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->create([
-            'name' => 'Kai N',
-            'email' => 'kai@example.com',
-            'password' => bcrypt('password'),
-            'type' => User::ADMIN,
-            'profile_photo_path' => 'https://unavatar.io/kai0310'
-        ]);
+        User::factory()
+            ->has(
+                Todo::factory()->count(10)
+            )
+            ->create([
+                'name' => 'Civictech 太郎',
+                'email' => 'civictech@example.com',
+                'password' => bcrypt('password'),
+                'type' => User::ADMIN,
+                'profile_photo_path' => 'https://unavatar.io/kai0310'
+            ]);
 
         User::factory()
-            ->count(100)
-            ->has(
-                Schedule::factory()->count(5),
-            )
+            ->count(10)
             ->has(
                 Todo::factory()->count(10)
             )

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Character;
 use App\Models\Todo;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -20,8 +21,11 @@ class TodoFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
+
+        $characters = Character::virus()->get()->count();
+
         return [
             'user_id' => User::factory(),
             'period_day' => $this->faker->dateTimeThisYear(),
