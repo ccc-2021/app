@@ -5,6 +5,8 @@ import IconHome from "@/Components/Icons/IconHome";
 import IconSearch from "@/Components/Icons/IconSearch";
 import IconHeart from "@/Components/Icons/IconHeart";
 import { InertiaLink } from "@inertiajs/inertia-react";
+import MyModal from "@/Components/Atomic/Atoms/modal";
+
 
 type Props = {
     name: string
@@ -37,9 +39,7 @@ export const IconLink: React.FC<Props> = ({ name, link, children }) => {
 export const BottomTabs: React.FC = () => (
     <footer className="sm:hidden bottom-0 shadow-2xl border-t w-screen fixed z-50 bg-white">
         <div className="items-cent flex items-center justify-center justify-items-center max-w-5xl mx-auto my-3">
-            <IconLink name="今日の予定" link="todos/create">
-                <IconHome />
-            </IconLink>
+            <MyModal />
 
             <IconLink name="発見する" link="#">
                 <IconSearch />

@@ -1,8 +1,9 @@
-import React, {useState} from "react";
-import {Tab} from "@headlessui/react";
+import React, { useState } from "react";
+import { Tab } from "@headlessui/react";
 import classNames from "classnames";
 import TodoButton from "@/Components/Atomic/Atoms/TodoButton";
-import {format, parse} from 'date-fns'
+import { format, parse } from 'date-fns'
+import { BottomTabs } from "../Molecules/BottomTabs";
 
 
 // TODO: Fix type of Todo
@@ -34,7 +35,7 @@ function getNowYMDStr() {
     return `${Y}-${M}-${D}`
 }
 
-export const Label: React.FC<{ date: string, isFirst: boolean }> = ({date, isFirst}) => {
+export const Label: React.FC<{ date: string, isFirst: boolean }> = ({ date, isFirst }) => {
     let today = new Date(getNowYMDStr());
     let isPassed = new Date(date) < today;
 
@@ -43,15 +44,15 @@ export const Label: React.FC<{ date: string, isFirst: boolean }> = ({date, isFir
             {
                 !isPassed ? (
                     <span className="text-blue-500">
-                    {formatDate(date)}
-                </span>
+                        {formatDate(date)}
+                    </span>
                 ) : isFirst && '期限切れ'
             }
         </>
     );
 }
 
-export const TodoListTab: React.FC<{ todos: Todo[] }> = ({todos}) => {
+export const TodoListTab: React.FC<{ todos: Todo[] }> = ({ todos }) => {
 
     const labels = ['TODO', '消毒済み'];
 
@@ -64,7 +65,7 @@ export const TodoListTab: React.FC<{ todos: Todo[] }> = ({todos}) => {
                     {labels.map((label, key) => (
                         <Tab
                             key={key}
-                            className={({selected}) =>
+                            className={({ selected }) =>
                                 classNames(
                                     'w-full py-2.5 text-sm leading-5 font-medium rounded-lg select-none',
                                     'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60',
@@ -91,7 +92,7 @@ export const TodoListTab: React.FC<{ todos: Todo[] }> = ({todos}) => {
                             <ul className="mx-3">
                                 {Object.entries(category).map((date, dateKey) => (
                                     <li key={`date-${dateKey}`} className="text-2xl">
-                                        <Label date={date[0]} isFirst={dateKey === 0}/>
+                                        <Label date={date[0]} isFirst={dateKey === 0} />
                                         <ul className="ml-4 mr-4 mb-6 grid  gap-8 grid-cols-2 text-base">
                                             {Object.values(date[1].map((todo, todoKey) => (
                                                 <TodoButton todo={todo} key={`todo-${todoKey}`} />
@@ -102,6 +103,8 @@ export const TodoListTab: React.FC<{ todos: Todo[] }> = ({todos}) => {
                             </ul>
                         </Tab.Panel>
                     ))}
+                    <BottomTabs />
+
                 </Tab.Panels>
             </Tab.Group>
 
