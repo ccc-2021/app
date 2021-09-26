@@ -12,7 +12,6 @@ export default function Create(props: React.PropsWithChildren<any>) {
         title: "",
         content: "",
         period_day: "",
-        is_repetition: "",
     });
 
     // @ts-ignore
@@ -96,7 +95,7 @@ export default function Create(props: React.PropsWithChildren<any>) {
 
                     <div className="flex items-center justify-end mt-4">
                         <Button
-                            className="mt-32 mb-10 w-full text-2xl  text-center"
+                            className="mt-32 mb-10 w-full text-2xl  text-center pl-16"
                             processing={processing}
                         >
                             タスクを追加

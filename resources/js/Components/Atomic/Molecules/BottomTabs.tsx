@@ -5,7 +5,7 @@ import IconHome from "@/Components/Icons/IconHome";
 import IconSearch from "@/Components/Icons/IconSearch";
 import IconHeart from "@/Components/Icons/IconHeart";
 import { InertiaLink } from "@inertiajs/inertia-react";
-import MyModal from "@/Components/Atomic/Atoms/modal";
+import MyModal from "@/Components/Atomic/Atoms/Modal";
 
 
 type Props = {
@@ -18,7 +18,7 @@ export const IconLink: React.FC<Props> = ({ name, link, children }) => {
     return (
         <InertiaLink
             href={link}
-            className='w-full flex flex-col self-center text-center'
+            className='w-1/2 flex flex-col self-center text-center'
         >
             <div className={cn(
                 'block w-7 h-7 fill-current text-gray-500 mx-auto',
@@ -41,9 +41,9 @@ export const BottomTabs: React.FC = () => (
         <div className="items-cent flex items-center justify-center justify-items-center max-w-5xl mx-auto my-3">
             <MyModal />
 
-            <IconLink name="発見する" link="#">
+            {/* <IconLink name="発見する" link="#">
                 <IconSearch />
-            </IconLink>
+            </IconLink> */}
 
             <IconLink name="お気に入り" link="#">
                 <IconHeart />

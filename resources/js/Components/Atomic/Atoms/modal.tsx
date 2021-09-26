@@ -21,9 +21,9 @@ export default function MyModal() {
                 <button
                     type="button"
                     onClick={openModal}
-                    className="px-4 py-2 text-sm "
+                    className="px-4 py-4 text-sm "
                 >
-                    Open dialog
+                    タスクを追加する
         </button>
             </div>
 
